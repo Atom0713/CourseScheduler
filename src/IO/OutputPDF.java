@@ -60,6 +60,7 @@ public class OutputPDF {
 
 
 
+
                 //To avoid having the cell border and the content overlap, if you are having thick cell borders
                 //cell1.setUserBorderPadding(true);
                 //cell2.setUserBorderPadding(true);
