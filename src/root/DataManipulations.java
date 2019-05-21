@@ -7,15 +7,26 @@ public class DataManipulations {
     private HashMap<String, ArrayList<Class>> completeSchedule;
     private int maxClassesAtSameTime;
     private Timetable timetable;
+    private Class[] classes;
+    private String[][] classesAsCodeTimeRoom;
     
     public DataManipulations(Timetable resultantTimetable) {
         this.timetable=resultantTimetable;
         completeSchedule = new HashMap<>();
-        Class[] classes = resultantTimetable.getClasses();
+        this.classes = resultantTimetable.getClasses();
+        this.classesAsCodeTimeRoom = new String[classes.length][3];
         int max = 1;
+        int classCounter=0;
         for (Class singleClass : classes) {
-            //Getting time periods of each class as an indexes
+            //Preparing classesAsStringArray to print it later in pdf
             TimePeriod timePeriod = resultantTimetable.getTimePeriod(singleClass.getTimePeriodId());
+            String classRoom = resultantTimetable.getClassRoom(singleClass.getClassRoomId()).getClassRoomName();
+            String courseCode = resultantTimetable.getCourse(singleClass.getCourseId()).getCourseCode();
+            classesAsCodeTimeRoom[classCounter][0] = courseCode;
+            classesAsCodeTimeRoom[classCounter][1] = timePeriod.getTimePeriodAsString();
+            classesAsCodeTimeRoom[classCounter][2] = classRoom;
+
+            //Getting time periods of each class as an indexes
             int[][] timePeriodIndexes = timePeriod.getTimePeriodAsIndexes();
             for (int i = 0; i < timePeriodIndexes.length; i++) {
                 String mergedIndex = "" + (char)(timePeriodIndexes[i][0]+48)+(char)(timePeriodIndexes[i][1]+48);
@@ -33,6 +44,7 @@ public class DataManipulations {
                     this.completeSchedule.replace(mergedIndex,temp);
                 }
             }
+            classCounter++;
         }
         this.maxClassesAtSameTime = max;
     }
@@ -76,6 +88,13 @@ public class DataManipulations {
             }
         }
         return cmpltSchString;
+    }
+
+    /** This function return a String array, where each element is on type:
+     *      ["CourseCode \t TimePeriod \t Classroom", ...]
+     */
+    public String[][] getClassesAsCodeTimeRoom(){
+        return classesAsCodeTimeRoom;
     }
 
     public int getMaxClassesAtSameTime() {

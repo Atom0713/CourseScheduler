@@ -1,6 +1,7 @@
 package GUI;
 
 import IO.OutputEXCEL;
+import IO.OutputPDF;
 import root.*;
 import root.Class;
 
@@ -161,8 +162,13 @@ public class MainFrame {
                         allClassRoomsNames.add(classRooms[i].getClassRoomName());
                     }
 
+
+                    DataManipulations dm = new DataManipulations(timetable);
+
+                    //OutputPDF.writeAllToPdf(dm.getClassesAsCodeTimeRoom());
+
                     //OutputFrame constructor gets all the timetable and other information necessary as arguments to produce output frame.
-                    OutputFrame outputFrame = new OutputFrame(generation, population.get_fittest(0).get_fitness(), timetable.calculate_clashes(), allProfNames,allProfTimetables, allClassRoomsNames,allClassRoomsTimetables);
+                    OutputFrame outputFrame = new OutputFrame(generation, population.get_fittest(0).get_fitness(), timetable.calculate_clashes(), allProfNames,allProfTimetables, allClassRoomsNames,allClassRoomsTimetables,dm);
                     OutputEXCEL outputExcel = new OutputEXCEL(timetable);
                     //main output frame
                     outputFrame.outputFrame();

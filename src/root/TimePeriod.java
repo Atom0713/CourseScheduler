@@ -15,7 +15,7 @@ public class TimePeriod {
         return timePeriodId;
     }
 
-    public String getTimePeriod() {
+    public String getTimePeriodAsString() {
         return timePeriod;
     }
 

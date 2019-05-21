@@ -1,6 +1,8 @@
 package GUI;
 
 import IO.OutputEXCEL;
+import IO.OutputPDF;
+import root.DataManipulations;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +19,8 @@ public class OutputFrame
     static ArrayList<String[][]> allProfTimetables;
     static ArrayList<String> allClassRoomsNames;
     static ArrayList<String[][]> allClassRoomsTimetables;
-    public OutputFrame(int generation, double fitness, int clashes, ArrayList<String> allProfNames, ArrayList<String[][]> allProfTimetables, ArrayList<String> allClassRoomsNames, ArrayList<String[][]> allClassRoomsTimetables)
+    static DataManipulations dm;
+    public OutputFrame(int generation, double fitness, int clashes, ArrayList<String> allProfNames, ArrayList<String[][]> allProfTimetables, ArrayList<String> allClassRoomsNames, ArrayList<String[][]> allClassRoomsTimetables, DataManipulations dm)
     {
         this.allProfNames=allProfNames;
         this.allProfTimetables=allProfTimetables;
@@ -26,6 +29,7 @@ public class OutputFrame
         this.generation=generation;
         this.allClassRoomsNames=allClassRoomsNames;
         this.allClassRoomsTimetables=allClassRoomsTimetables;
+        this.dm = dm;
     }
 
     public static void outputFrame() throws Exception
@@ -69,11 +73,11 @@ public class OutputFrame
                         output.classroomsTimetableOutputExcel(allClassRoomsNames,allClassRoomsTimetables);                }
                 if(cb3.isSelected())
                 {//weekly schedule, all courses
-                    output.weeklyTimetableOutputExcel();
+                    output.weeklyTimetableOutputExcel(dm);
                 }
                 if(cb5.isSelected())
                 {
-
+                    OutputPDF.writeAllToPdf(dm.getClassesAsCodeTimeRoom());
                 }
             }
         });

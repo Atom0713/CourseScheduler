@@ -242,7 +242,7 @@ public class OutputEXCEL {
         catch (Exception e) { e.printStackTrace();
         }
     }
-    public static void weeklyTimetableOutputExcel()
+    public static void weeklyTimetableOutputExcel(DataManipulations dm)
     {
         //Blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -276,7 +276,7 @@ public class OutputEXCEL {
         ====================================================================================================
         */
                  //print days
-        DataManipulations dm = new DataManipulations(timetable);
+        //DataManipulations dm = new DataManipulations(timetable);
         String[][] completeSchedule = dm.getCompleteScheduleAs2dStringArray();
         int dayTrigger = dm.getMaxClassesAtSameTime(), dayIndex=0;
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
