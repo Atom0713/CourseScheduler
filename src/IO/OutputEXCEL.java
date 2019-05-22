@@ -25,7 +25,7 @@ public class OutputEXCEL {
     public OutputEXCEL() {
     }
 
-    public static void professorsTimetableOutputExcel(ArrayList<String> profNames, ArrayList<String[][]> profTimetable)
+    public static void professorsTimetableOutputExcel(ArrayList<String> profNames, ArrayList<String[][]> profTimetable, String path)
     {
         //Blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -125,14 +125,14 @@ public class OutputEXCEL {
         try
         {
             //Write the workbook in file system
-            FileOutputStream out = new FileOutputStream(new File(getDesctopPath()+"\\Academic Staff Timetable.xlsx"));
+            FileOutputStream out = new FileOutputStream(new File(path+"\\Academic Staff Timetable.xlsx"));
             workbook.write(out);
             out.close();
         }
         catch (Exception e) { e.printStackTrace(); }
     }
 
-    public static void classroomsTimetableOutputExcel(ArrayList<String> allClassRoomNames, ArrayList<String[][]> allClassRoomsTimetables)
+    public static void classroomsTimetableOutputExcel(ArrayList<String> allClassRoomNames, ArrayList<String[][]> allClassRoomsTimetables, String path)
     {
         //Blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -235,14 +235,14 @@ public class OutputEXCEL {
         try
         {
             //Write the workbook in file system
-            FileOutputStream out = new FileOutputStream(new File(getDesctopPath()+"\\Classrooms Timetable.xlsx"));
+            FileOutputStream out = new FileOutputStream(new File(path+"\\Classrooms Timetable.xlsx"));
             workbook.write(out);
             out.close();
         }
         catch (Exception e) { e.printStackTrace();
         }
     }
-    public static void weeklyTimetableOutputExcel(DataManipulations dm)
+    public static void weeklyTimetableOutputExcel(DataManipulations dm, String path)
     {
         //Blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -337,7 +337,7 @@ public class OutputEXCEL {
         try
         {
             //Write the workbook in file system
-            FileOutputStream out = new FileOutputStream(new File(getDesctopPath()+"\\Eng. Fac. Weekly Timetable.xlsx"));
+            FileOutputStream out = new FileOutputStream(new File(path+"\\Eng. Fac. Weekly Timetable.xlsx"));
             workbook.write(out);
             out.close();
         }

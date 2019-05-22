@@ -12,14 +12,14 @@ import java.io.FileOutputStream;
 
 public class OutputPDF {
 
-    public static void writeAllToPdf(String[][] classes) {
+    public static void writeAllToPdf(String[][] classes, String path) {
         Document document = new Document();
 
         try {
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("CompleteSchedule.pdf"));
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(path+"\\CompleteSchedule.pdf"));
             document.open();
             PdfPTable table = new PdfPTable(3); // 3 columns.
-            document.add(new Paragraph("Complete schedule:"));
+            document.add(new Paragraph("Engineering Department Weekly Schedule:"));
             int i =0;
             for (String[] oneClass : classes) {
                 //System.out.println(oneClass[0]);
