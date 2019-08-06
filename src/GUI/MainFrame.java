@@ -1,7 +1,6 @@
 package GUI;
 
 import IO.OutputEXCEL;
-import IO.OutputPDF;
 import root.*;
 import root.Class;
 
@@ -53,7 +52,7 @@ public class MainFrame {
         runGA.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                loadingLable.setBounds(150,50,250,30);
+
 
                 try{
                     //main processes
@@ -77,7 +76,7 @@ public class MainFrame {
                     // Start evolution loop
                     int nonProgressingGenerationsCount = 0;
                     double previousFitness = population.get_fittest(0).get_fitness();
-                    while (!ga.is_termination_condition_met(generation, 50000) && !ga.is_termination_condition_met(population,nonProgressingGenerationsCount)) {
+                    while (!ga.is_termination_condition_met(generation, 5) && !ga.is_termination_condition_met(population,nonProgressingGenerationsCount)) {
                         if(population.get_fittest(0).get_fitness()>previousFitness){
                             previousFitness=population.get_fittest(0).get_fitness();
                             nonProgressingGenerationsCount=0;
@@ -102,17 +101,10 @@ public class MainFrame {
                     }
                     // Print fitness
                     timetable.createClasses(population.get_fittest(0));
-                    //System.out.println();
-                    //System.out.println("Solution found in " + generation + " generations");
-
-                    //System.out.println("Final solution fitness: " + population.get_fittest(0).get_fitness());
-                    //System.out.println("Clashes: " + timetable.calculate_clashes());
-
 
                     /** Здесь выводится результат, здесь же заполняются расписания преподов и кабинетов
                      *
                      */
-                    //System.out.println();
                     Class[] classes = timetable.getClasses();
                     int classIndex = 1;
                     for (Class bestClass : classes) {
@@ -127,12 +119,6 @@ public class MainFrame {
                             professor.addToProfessorsTimetable(timePeriodIndexes[i][0],timePeriodIndexes[i][1],classRoom.getClassRoomName(),course.getCourseCode());
                             classRoom.addToClassRoomsTimetable(timePeriodIndexes[i][0],timePeriodIndexes[i][1],course.getCourseCode());
                         }
-//                        System.out.println("Class " + classIndex + ":");
-//                        System.out.println("Course: " + course.getCourseName());
-//                        System.out.println("ClassRoom: " + classRoom.getClassRoomName());
-//                        System.out.println("Professor: " + professor.getProfessorName());
-//                        System.out.println("TimePeriod: " + timePeriod.getTimePeriod());
-//                        System.out.println("-----");
                         classIndex++;
                     }
 
@@ -173,6 +159,7 @@ public class MainFrame {
                     //main output frame
                     outputFrame.outputFrame();
                 }catch (Exception ex){
+                    loadingLable.setBounds(150,50,250,30);
                     System.out.println(ex);
                 }
             }

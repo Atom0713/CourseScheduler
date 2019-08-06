@@ -1,13 +1,10 @@
 package IO;
 
 import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-
-import javax.swing.border.Border;
 import java.io.FileOutputStream;
 
 public class OutputPDF {
@@ -81,6 +78,8 @@ public class OutputPDF {
             document.add(table);
 
             document.close();
+
+
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();
