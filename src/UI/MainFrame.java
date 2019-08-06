@@ -1,4 +1,4 @@
-package GUI;
+package UI;
 
 import IO.OutputEXCEL;
 import root.*;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class MainFrame {
     public static String path=null;//will hold path to the EXCEL input file
     public  static void mainFrame(){
-        //GUI..start
+        //UI..start
         //create Jframe object
         JFrame frame = new JFrame("Set up");
         //create labels and buttons objects
@@ -176,6 +176,6 @@ public class MainFrame {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        //GUI...end
+        //UI...end
     }
 }

@@ -1,6 +1,6 @@
 package root;
 
-import GUI.MainFrame;
+import UI.MainFrame;
 import IO.InputEXCEL;
 
 import java.io.IOException;
