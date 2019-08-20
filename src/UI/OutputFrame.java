@@ -81,11 +81,8 @@ public class OutputFrame
 
 
 
-        print.addActionListener(new ActionListener()
+        print.addActionListener((event) ->//event listener implementation using lambda expression
         {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
                 OutputPDF out = new OutputPDF();
                 OutputEXCEL output = new OutputEXCEL();
 
@@ -102,36 +99,34 @@ public class OutputFrame
                     output.weeklyTimetableOutputExcel(dm, path);
                 }
                 if(cb4.isSelected())
-                {//all courses pdf
+                {//all courses pdf view
                     out.writeAllToPdf(dm.getClassesAsCodeTimeRoom(), path);
                 }
                 if(cb5.isSelected())
-                {//1st class
+                {//1st class view
                 }
                 if(cb6.isSelected())
-                {//2st class
+                {//2st class view
 
                 }
                 if(cb7.isSelected())
-                {//3st class
+                {//3st class view
 
                 }
                 if(cb8.isSelected())
-                {//4st class
+                {//4st class view
 
                 }
-            }
         });
-        savePath.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+
+        savePath.addActionListener((event) ->{ //event listener implementation using lambda expression
                 JFileChooser f = new JFileChooser();
                 f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 f.showSaveDialog(null);
                 path = f.getSelectedFile().getPath();
                 pathField.setText(path);
-            }
         });
+
         showProcessFrame.add(pathField);
         showProcessFrame.add(savePath);
         showProcessFrame.add(area);
@@ -153,9 +148,6 @@ public class OutputFrame
         showProcessFrame.setLocationRelativeTo(null);
         showProcessFrame.setVisible(true);
     }
-
-
-
 
 
 }

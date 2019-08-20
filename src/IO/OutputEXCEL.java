@@ -477,7 +477,6 @@ public class OutputEXCEL {
                     cell = row.createCell(cellnum++);
             }
 
-
             if(columnIndex == 6)
                 break;
 

@@ -24,9 +24,7 @@ public class MainFrame {
         chooseFileButton.setBounds(80,10,80,30);
         chooseFileLabel.setBounds(10, 10, 90,30);
 
-        chooseFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        chooseFileButton.addActionListener( (event) -> {//event listener implementation using lambda expression
 
                 JFileChooser chooseFile = new JFileChooser();
                 //invoke the showSaveDialog function to show the save dialog
@@ -38,7 +36,6 @@ public class MainFrame {
                     //set the path to the path of the selected file
                     path = chooseFile.getSelectedFile().getAbsolutePath();
                 }
-            }
         });
 
 
@@ -49,11 +46,7 @@ public class MainFrame {
         runGA.setBounds(100,200,200,30);
         run1.setBounds(100,250,200,30);
         run2.setBounds(100,300,200,30);
-        runGA.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e){
-
-
+        runGA.addActionListener( (event) -> {
                 try{
                     //main processes
                     System.out.println("Initialization of root.Timetable started...");
@@ -76,7 +69,7 @@ public class MainFrame {
                     // Start evolution loop
                     int nonProgressingGenerationsCount = 0;
                     double previousFitness = population.get_fittest(0).get_fitness();
-                    while (!ga.is_termination_condition_met(generation, 5) && !ga.is_termination_condition_met(population,nonProgressingGenerationsCount)) {
+                    while (!ga.is_termination_condition_met(generation, 50000) && !ga.is_termination_condition_met(population,nonProgressingGenerationsCount)) {
                         if(population.get_fittest(0).get_fitness()>previousFitness){
                             previousFitness=population.get_fittest(0).get_fitness();
                             nonProgressingGenerationsCount=0;
@@ -162,9 +155,8 @@ public class MainFrame {
                     loadingLable.setBounds(150,50,250,30);
                     System.out.println(ex);
                 }
-            }
         });
-        //adding labels buttons to the frame. Setting its size and layout and default close operation.
+        //adding labels, and buttons to the frame. Setting its size and layout and default close operation.
         frame.add(loadingLable);
         frame.add(chooseFileLabel);
         frame.add(chooseFileButton);
