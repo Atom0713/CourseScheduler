@@ -19,7 +19,7 @@ public class OutputEXCEL {
     static Timetable timetable;
     public OutputEXCEL(Timetable timetable)
     {
-        this.timetable=timetable;
+        OutputEXCEL.timetable =timetable;
     }
 
     public OutputEXCEL() {
@@ -89,7 +89,7 @@ public class OutputEXCEL {
         //TreeMap will be holding timetable of each separate sheet, and used to fill the EXCEL file with that data.
         TreeMap<String, Object[]> data = new TreeMap<String, Object[]>();
 
-        //Declare couple neccessary objects,
+        //Declare couple necessary objects,
         Object[] objArr = null;
         Row row = null;
         Cell cell = null;
@@ -104,7 +104,6 @@ public class OutputEXCEL {
         for (int pnames = 0; pnames < profNames.size(); pnames++)
         {
             sheet = workbook.createSheet(profNames.get(pnames));
-
             row = sheet.createRow(rowNum++);
 
             /*
@@ -146,40 +145,29 @@ public class OutputEXCEL {
                 * Attempts ordering keyset in ascending order failed, so far!
                 * For loop below helps to locate the key to the data that is required!
                  */
-                //TODO: order keyset without looping(reduce tine!)
+                //order keyset without looping(reduce time!)
                 for(String key: keyset)
                 {
                     if(key.equals(Integer.toString(i)))
-                    {
-                        objArr = data.get(key);
-                    }
+                    { objArr = data.get(key); }
                 }
 
                 cellNum = 0;//every new sheet requires cellNum to start from 0
                 for (Object obj : objArr)
-                {
-                    cell = row.createCell(cellNum++);
+                { cell = row.createCell(cellNum++);
 
                     if(cellNum == 1)//"Time" column
-                    {
-                        cell.setCellStyle(timeIntervalsStyle);
-
-                    }else{
-                            cell.setCellStyle(timeTableStyle);
-                    }
+                    { cell.setCellStyle(timeIntervalsStyle);}
+                    else
+                        { cell.setCellStyle(timeTableStyle); }
 
                     if(obj instanceof String)
-                    {
-                        cell.setCellValue((String)obj);
-
-                    } else if(obj instanceof Integer)
-                    {
-                        cell.setCellValue((Integer)obj);
-                    }
+                    { cell.setCellValue((String)obj); }
+                    else if(obj instanceof Integer)
+                    { cell.setCellValue((Integer)obj); }
 
                 }
             }
-            //sheet.autoSizeColumn(pnames);
             rowNum = 0;//row count should be set to zero prior to the new sheet creation.
             cellNum = 0;
             data = new TreeMap<String, Object[]>();
@@ -222,7 +210,8 @@ public class OutputEXCEL {
         timeTableStyle.setWrapText(true);
         timeTableStyle.setAlignment(HorizontalAlignment.CENTER);
         timeTableStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-        /* attach the font to the daysOfTheWeekStyle created earlier
+        /*
+         * attach the font to the daysOfTheWeekStyle created earlier
          * Columns B:G
          */
         daysOfTheWeekStyle.setFont(daysOfTheWeekFont);
@@ -261,7 +250,7 @@ public class OutputEXCEL {
         //Fill TreeMap with the data to be written to the excel file
         TreeMap<String, Object[]> data = new TreeMap<String, Object[]>();
 
-        //Declare couple neccessary objects,
+        //Declare couple necessary objects,
         Object[] objArr;
         Row row;
         Cell cell;
@@ -283,7 +272,7 @@ public class OutputEXCEL {
              */
             if(rowNum == 1)
             {
-                objArr = new Object[] {"Time", "Professors Name", "Monday","Tuesday", "Wednesday", "Thursday", "Friday"};
+                objArr = new Object[] {"Time", "Classroom", "Monday","Tuesday", "Wednesday", "Thursday", "Friday"};
                 for (Object obj : objArr)
                 {
                     cell = row.createCell(cellNum++);
@@ -295,7 +284,7 @@ public class OutputEXCEL {
 
             String[][] classromTimetable = allClassRoomsTimetables.get(classroom);;
             /*
-             * Collecting all data neccessary for the timetable creation of each professor.
+             * Collecting all data necessary for the timetable creation of each professor.
              */
             for (int j = 1; j < 10; j++)
             {
@@ -317,7 +306,7 @@ public class OutputEXCEL {
                  * Attempts ordering keyset in ascending order failed, so far!
                  * For loop below helps to locate the key to the data that is required!
                  */
-                //TODO: order keyset without looping(reduce tine!)
+                //order keyset without looping(reduce time!)
                 for(String key: keyset)
                 {
                     if(key.equals(Integer.toString(i)))
@@ -326,7 +315,8 @@ public class OutputEXCEL {
                     }
                 }
 
-                cellNum = 0;//every new sheet requires cellNum to start from 0
+                //every new sheet requires cellNum to start from 0
+                cellNum = 0;
                 for (Object obj : objArr)
                 {
                     cell = row.createCell(cellNum++);
@@ -350,7 +340,8 @@ public class OutputEXCEL {
 
                 }
             }
-            rowNum = 0;//row count should be set to zero prior to the new sheet creation.
+            //row count should be set to zero prior to the new sheet creation.
+            rowNum = 0;
             cellNum = 0;
             data = new TreeMap<String, Object[]>();
         }
@@ -440,11 +431,10 @@ public class OutputEXCEL {
         int rownum = 0;
         int cellnum = 0;
 
-                 /* This part is creating a complete schedule, that is ready to be printed
+        /* This part is creating a complete schedule, that is ready to be printed
           and prints it in table view
         ====================================================================================================
         */
-                 //print columnNames
         //DataManipulations dm = new DataManipulations(timetable);
         String[][] completeSchedule = dm.getCompleteScheduleAs2dStringArray();
         int dayTrigger = dm.getMaxClassesAtSameTime(), columnIndex = 0;
@@ -504,7 +494,6 @@ public class OutputEXCEL {
                 cell.setCellValue(completeSchedule[j][i]);
             }
         }
-        //autisizeColumns(workbook,1, completeSchedule.length );
 
         try
         {
