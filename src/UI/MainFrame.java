@@ -49,21 +49,21 @@ public class MainFrame {
         runGA.addActionListener( (event) -> {
                 try{
                     //main processes
-                    System.out.println("Initialization of root.Timetable started...");
+                    //System.out.println("Initialization of root.Timetable started...");
                     Timetable timetable = MainGA.initializeTimetable(path);
-                    System.out.println("Initialization of root.Timetable Finished\n");
+                    //System.out.println("Initialization of root.Timetable Finished\n");
 
-                    System.out.println("Initialization of Genetic Algorithm started...");
+                    //System.out.println("Initialization of Genetic Algorithm started...");
                     GA ga = new GA(200, 0.02, 0.9, 2, 5);
-                    System.out.println("Initialization of Genetic Algorithm finished...\n");
+                    //System.out.println("Initialization of Genetic Algorithm finished...\n");
 
-                    System.out.println("Initialization of root.Population started...");
+                    //System.out.println("Initialization of root.Population started...");
                     Population population = ga.initialize_population(timetable);
-                    System.out.println("Initialization of root.Population finished.\n");
+                    //System.out.println("Initialization of root.Population finished.\n");
 
-                    System.out.println("First population is being evaluated...");
+                    //System.out.println("First population is being evaluated...");
                     ga.evaluate_population(population, timetable);
-                    System.out.println("First population is evaluated.\n");
+                    //System.out.println("First population is evaluated.\n");
                     // Keep track of current generation
                     int generation = 1;
                     // Start evolution loop
@@ -74,9 +74,9 @@ public class MainFrame {
                             previousFitness=population.get_fittest(0).get_fitness();
                             nonProgressingGenerationsCount=0;
                         }
-                        System.out.println("Generation number: "+ generation);
+                        //System.out.println("Generation number: "+ generation);
                         // Print fitness
-                        System.out.println("G" + generation + " Best fitness: " + population.get_fittest(0).get_fitness());
+                        //System.out.println("G" + generation + " Best fitness: " + population.get_fittest(0).get_fitness());
 
                         // Apply crossover
                         population = ga.crossover(population);
@@ -95,9 +95,6 @@ public class MainFrame {
                     // Print fitness
                     timetable.createClasses(population.get_fittest(0));
 
-                    /** Здесь выводится результат, здесь же заполняются расписания преподов и кабинетов
-                     *
-                     */
                     Class[] classes = timetable.getClasses();
                     int classIndex = 1;
                     for (Class bestClass : classes) {
@@ -108,24 +105,25 @@ public class MainFrame {
 
                         //Filling timetables of Professors and ClassRooms
                         int[][] timePeriodIndexes = timePeriod.getTimePeriodAsIndexes();
-                        for (int i = 0; i < timePeriodIndexes.length; i++) {
-                            professor.addToProfessorsTimetable(timePeriodIndexes[i][0],timePeriodIndexes[i][1],classRoom.getClassRoomName(),course.getCourseCode());
-                            classRoom.addToClassRoomsTimetable(timePeriodIndexes[i][0],timePeriodIndexes[i][1],course.getCourseCode());
+                        for (int[] timePeriodIndex : timePeriodIndexes) {
+                            professor.addToProfessorsTimetable(timePeriodIndex[0], timePeriodIndex[1], classRoom.getClassRoomName(), course.getCourseCode());
+                            classRoom.addToClassRoomsTimetable(timePeriodIndex[0], timePeriodIndex[1], course.getCourseCode());
                         }
                         classIndex++;
                     }
 
 
-                    /** @allProfTimetables содержит в себе расписания каждого профессора
+                    /*
+                     * @allProfTimetables содержит в себе расписания каждого профессора
                      * @allProfNames содержит имена всех преподов в том же порядке что и @allProfTimetables
                      */
 
                     ArrayList<String[][]> allProfTimetables = new ArrayList<>();
                     ArrayList<String> allProfNames = new ArrayList<>();
                     Professor[] professors = timetable.getProfessorsAsArray();
-                    for (int i = 0; i < professors.length; i++) {
-                        allProfTimetables.add(professors[i].getTimetable());
-                        allProfNames.add(professors[i].getProfessorName());
+                    for (Professor professor : professors) {
+                        allProfTimetables.add(professor.getTimetable());
+                        allProfNames.add(professor.getProfessorName());
                     }
 
 
@@ -136,9 +134,9 @@ public class MainFrame {
                     ArrayList<String[][]> allClassRoomsTimetables = new ArrayList<>();
                     ArrayList<String> allClassRoomsNames = new ArrayList<>();
                     ClassRoom[] classRooms = timetable.getClassRoomsAsArray();
-                    for (int i = 0; i < classRooms.length; i++) {
-                        allClassRoomsTimetables.add(classRooms[i].getTimetable());
-                        allClassRoomsNames.add(classRooms[i].getClassRoomName());
+                    for (ClassRoom classRoom : classRooms) {
+                        allClassRoomsTimetables.add(classRoom.getTimetable());
+                        allClassRoomsNames.add(classRoom.getClassRoomName());
                     }
 
 
@@ -150,10 +148,10 @@ public class MainFrame {
                     OutputFrame outputFrame = new OutputFrame(generation, population.get_fittest(0).get_fitness(), timetable.calculate_clashes(), allProfNames,allProfTimetables, allClassRoomsNames,allClassRoomsTimetables,dm);
                     OutputEXCEL outputExcel = new OutputEXCEL(timetable);
                     //main output frame
-                    outputFrame.outputFrame();
+                    OutputFrame.outputFrame();
                 }catch (Exception ex){
                     loadingLable.setBounds(150,50,250,30);
-                    System.out.println(ex);
+                    //System.out.println(ex);
                 }
         });
         //adding labels, and buttons to the frame. Setting its size and layout and default close operation.

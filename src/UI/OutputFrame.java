@@ -88,19 +88,19 @@ public class OutputFrame
 
                 if(cb1.isSelected())
                 {//professors view
-                    output.professorsTimetableOutputExcel(allProfNames, allProfTimetables, path);
+                    OutputEXCEL.professorsTimetableOutputExcel(allProfNames, allProfTimetables, path);
                 }
                 if(cb2.isSelected())
                 {//classrooms view
-                       output.classroomsTimetableOutputExcel(allClassRoomsNames,allClassRoomsTimetables, path);
+                       OutputEXCEL.classroomsTimetableOutputExcel(allClassRoomsNames,allClassRoomsTimetables, path);
                 }
                 if(cb3.isSelected())
                 {//weekly schedule, all courses
-                    output.weeklyTimetableOutputExcel(dm, path);
+                    OutputEXCEL.weeklyTimetableOutputExcel(dm, path);
                 }
                 if(cb4.isSelected())
                 {//all courses pdf view
-                    out.writeAllToPdf(dm.getClassesAsCodeTimeRoom(), path);
+                    OutputPDF.writeAllToPdf(dm.getClassesAsCodeTimeRoom(), path);
                 }
                 if(cb5.isSelected())
                 {//1st class view

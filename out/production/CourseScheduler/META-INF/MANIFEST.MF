@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: root.MainGA
-Class-Path: itextpdf-5.5.13.jar
-

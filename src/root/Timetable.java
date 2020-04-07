@@ -103,7 +103,7 @@ public class Timetable{
 
     public ClassRoom getClassRoom(int classRoomId) {
         if (!this.classRooms.containsKey(classRoomId)) {
-            System.out.println("classRooms doesn't contain key " + classRoomId);
+            //System.out.println("classRooms doesn't contain key " + classRoomId);
         }
         return (ClassRoom) this.classRooms.get(classRoomId);
     }
@@ -211,7 +211,6 @@ public class Timetable{
                     int yearB = Course.getCourseYearByCode(this.getCourse(classB.getCourseId()).getCourseCode());
                     String[] facDepIdsB = this.getCourse(classB.getCourseId()).getCourseFaculty();
                     if (Course.isFacDepYearClashing(yearA, facDepIdsA, yearB, facDepIdsB)) {
-                        //System.out.println(this.getCourse(classA.getCourseId()).getCourseCode()+" clashes with "+this.getCourse(classB.getCourseId()).getCourseCode());
                         clashes++;
                         break;
                     }
